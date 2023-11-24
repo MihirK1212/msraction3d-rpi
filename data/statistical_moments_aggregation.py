@@ -28,9 +28,7 @@ def get_statistical_moments_aggregation(sequence):
 
     angle_sequence = data_utils.get_tssi_angle_sequence(sequence)
 
-    index_to_subtract = config.ROOT_JOINT_INDEX
-    vector_to_subtract = sequence[:, index_to_subtract, :]
-    sequence -= vector_to_subtract[:, np.newaxis, :]
+    sequence -= sequence[:, config.ROOT_JOINT_INDEX, :][:, np.newaxis, :]
 
     dim_sequence_x, dim_sequence_y, dim_sequence_z = sequence[:, :, 0], sequence[:, :, 1], sequence[:, :, 2]
     dim_sequence_x, dim_sequence_y, dim_sequence_z = data_utils.get_tssi_dim_sequence(dim_sequence_x), data_utils.get_tssi_dim_sequence(dim_sequence_y), data_utils.get_tssi_dim_sequence(dim_sequence_z)
