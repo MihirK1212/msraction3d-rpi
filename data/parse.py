@@ -1,5 +1,4 @@
 import numpy as np
-import copy
 
 import constants
 import data.statistical_moments_aggregation as statistical_moments_aggregation
@@ -7,21 +6,12 @@ import data.window_division_aggregation as window_division_aggregation
 
 
 def get_mean_feature_vector(sequence, aggregation_method):
-    
-    agg_sequence = copy.deepcopy(sequence)
-
-    if aggregation_method == constants.STATISTICAL_MOMENTS:
-        return statistical_moments_aggregation.get_statistical_moments_aggregation(
-            sequence=agg_sequence
-        )
-
-    elif aggregation_method == constants.WINDOW_DIVISION:
-        return window_division_aggregation.get_window_division_aggregation(
-            sequence=agg_sequence
-        )
-
-    else:
-        raise ValueError
+    agg_sequence = sequence.copy()
+    aggregation_functions = {
+        constants.STATISTICAL_MOMENTS: statistical_moments_aggregation.get_statistical_moments_aggregation,
+        constants.WINDOW_DIVISION: window_division_aggregation.get_window_division_aggregation,
+    }
+    return aggregation_functions[aggregation_method](sequence=agg_sequence)
 
 
 def get_parsed_testing_data(data, aggregation_method):

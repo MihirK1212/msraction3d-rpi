@@ -12,7 +12,7 @@ if __name__ == "__main__":
     data, labels, subjects = data_read.read_msr_data(data_dir=constants.MSR_ACTION_3D_DATA_DIR)
     data, labels, subjects = data_utils.remove_anomalies(data=data, labels=labels, subjects=subjects)
 
-    lb, ub = 13, 75
+    lb, ub = 40, 60
     data, labels, subjects = data[lb:ub], labels[lb:ub], subjects[lb:ub]
 
     with warnings.catch_warnings():

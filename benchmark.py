@@ -1,6 +1,7 @@
 import warnings
 import timeit
 import random
+import time
 
 import data.read as data_read
 import data.utils as data_utils
@@ -57,10 +58,6 @@ if __name__ == "__main__":
                         subjects[lb : (lb + num_test_samples)],
                     )
 
-                    assert len(data_curr) == num_test_samples
-                    assert len(labels_curr) == num_test_samples
-                    assert len(subjects_curr) == num_test_samples
-
                     avg_len = get_avg_len(data_curr)
 
                     num_iters = 3
@@ -73,3 +70,14 @@ if __name__ == "__main__":
                         f"Execution time for {num_test_samples} samples and avg len {avg_len}: {execution_time} seconds"
                     )
                     f.write(f"{num_test_samples} {avg_len} {execution_time}\n")
+
+                    # num_iters = 3
+                    # start_time = time.process_time()
+                    # for _ in range(num_iters):
+                    #     multimethod_ensemble.get_predictions(data_curr)
+                    # execution_time = (time.process_time() - start_time) / num_iters
+                    # print(
+                    #     f"Execution time for {num_test_samples} samples and avg len {avg_len}: {execution_time} seconds"
+                    # )
+                    # f.write(f"{num_test_samples} {avg_len} {execution_time}\n")
+

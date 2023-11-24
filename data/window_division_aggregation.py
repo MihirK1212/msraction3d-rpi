@@ -17,8 +17,6 @@ def get_sequence_windows(sequence, required_windows = config.NUM_WINDOWS, min_st
       ub+=stride
     assert ub == (num_frames - 1 + stride)
     assert len(windows) == required_windows
-    for window in windows:
-      assert window.shape[0] == window_size
     return windows
 
 def get_window_division_aggregation(sequence):

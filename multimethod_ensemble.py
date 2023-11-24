@@ -138,13 +138,12 @@ class MultimethodEnsemble:
 
 
     def get_model_data(self, aggregation_method):
-        if aggregation_method == constants.STATISTICAL_MOMENTS:
-            return self.statistical_moments_data
-        elif aggregation_method == constants.WINDOW_DIVISION:
-            return self.window_division_data
-        else:
-            raise ValueError
-
+        data_mapping = {
+            constants.STATISTICAL_MOMENTS: self.statistical_moments_data,
+            constants.WINDOW_DIVISION: self.window_division_data,
+        }
+        return data_mapping.get(aggregation_method, None)
+        
     def get_majority_vote(self, votes):
         return (
             max(Counter(votes).items(), key=lambda x: x[1])[0]
@@ -152,16 +151,16 @@ class MultimethodEnsemble:
             else votes[self.max_accuracy_trainer_index]
         )
 
+
     def get_polled_predictions(self, model_predictions_list):
-        predictions = []
-        num_samples = model_predictions_list[0].shape[0]
-        for s in range(num_samples):
-            votes = []
-            for ind, model_predictions in enumerate(model_predictions_list):
-                assert len(model_predictions) == num_samples, f"{model_predictions}, {len(model_predictions)}, {num_samples}, {ind}"
-                votes.append(int(model_predictions[s]))
-            prediction = self.get_majority_vote(votes)
-            predictions.append(prediction)
+        sample_wise_model_predictions = np.transpose(np.array(model_predictions_list, dtype=np.int64))
+        assert sample_wise_model_predictions.shape[1] == len(self.ensemble_trainers)
+        predictions = [
+            self.get_majority_vote(
+                row.tolist()
+            ) for row in sample_wise_model_predictions
+        ]
         return np.array(predictions, dtype=np.int64)
+    
 
     
