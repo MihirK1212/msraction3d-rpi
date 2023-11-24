@@ -60,24 +60,24 @@ if __name__ == "__main__":
 
                     avg_len = get_avg_len(data_curr)
 
-                    # num_iters = 3
-                    # execution_time = timeit.timeit(
-                    #     lambda: multimethod_ensemble.get_predictions(data_curr),
-                    #     number=num_iters,
-                    # )
-                    # execution_time /= num_iters
-                    # print(
-                    #     f"Execution time for {num_test_samples} samples and avg len {avg_len}: {execution_time} seconds"
-                    # )
-                    # f.write(f"{num_test_samples} {avg_len} {execution_time}\n")
-
                     num_iters = 3
-                    start_time = time.process_time()
-                    for _ in range(num_iters):
-                        multimethod_ensemble.get_predictions(data_curr)
-                    execution_time = (time.process_time() - start_time) / num_iters
+                    execution_time = timeit.timeit(
+                        lambda: multimethod_ensemble.get_predictions(data_curr),
+                        number=num_iters,
+                    )
+                    execution_time /= num_iters
                     print(
                         f"Execution time for {num_test_samples} samples and avg len {avg_len}: {execution_time} seconds"
                     )
                     f.write(f"{num_test_samples} {avg_len} {execution_time}\n")
+
+                    # num_iters = 3
+                    # start_time = time.process_time()
+                    # for _ in range(num_iters):
+                    #     multimethod_ensemble.get_predictions(data_curr)
+                    # execution_time = (time.process_time() - start_time) / num_iters
+                    # print(
+                    #     f"Execution time for {num_test_samples} samples and avg len {avg_len}: {execution_time} seconds"
+                    # )
+                    # f.write(f"{num_test_samples} {avg_len} {execution_time}\n")
 
