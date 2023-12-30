@@ -5,7 +5,7 @@ import json
 import constants
 import data.parse as data_parse
 
-# from models.neural_network import NeuralNetworkClassifierModel
+from models.neural_network import NeuralNetworkClassifierModel
 from models.random_forest import RandomForestClassifierModel
 from models.knn import KNNClassifierModel
 from models.svm import SVMClassifierModel
@@ -15,43 +15,43 @@ class MultimethodEnsemble:
     def __init__(self, training=True):
         self.training = training
         self.ensemble_trainers = self.ensemble_trainers = [
-            # {
-            #     "model": NeuralNetworkClassifierModel(lr_decay_epochs=100),
-            #     "aggregation_method": constants.STATISTICAL_MOMENTS,
-            #     "name": "nn1_statistical_moments",
-            # },
-            # {
-            #     "model": NeuralNetworkClassifierModel(
-            #         lr=0.01, lr_decay_epochs=100, num_epochs=200
-            #     ),
-            #     "aggregation_method": constants.STATISTICAL_MOMENTS,
-            #     "name": "nn2_statistical_moments",
-            # },
-            # {
-            #     "model": NeuralNetworkClassifierModel(
-            #         lr=0.1,
-            #         lr_decay_epochs=200,
-            #         num_epochs=200,
-            #         num_hidden_layers=2,
-            #         hidden_layer_dim_factor=[1, 1],
-            #     ),
-            #     "aggregation_method": constants.STATISTICAL_MOMENTS,
-            #     "name": "nn3_statistical_moments",
-            # },
-            # {
-            #     "model": NeuralNetworkClassifierModel(
-            #         lr=0.1, lr_decay_epochs=100, num_epochs=200
-            #     ),
-            #     "aggregation_method": constants.STATISTICAL_MOMENTS,
-            #     "name": "nn4_statistical_moments",
-            # },
-            # {
-            #     "model": NeuralNetworkClassifierModel(
-            #         lr=0.1, lr_decay_end_factor=1.0, lr_decay_epochs=100, num_epochs=100
-            #     ),
-            #     "aggregation_method": constants.STATISTICAL_MOMENTS,
-            #     "name": "nn5_statistical_moments",
-            # },
+            {
+                "model": NeuralNetworkClassifierModel(lr_decay_epochs=100),
+                "aggregation_method": constants.STATISTICAL_MOMENTS,
+                "name": "nn1_statistical_moments",
+            },
+            {
+                "model": NeuralNetworkClassifierModel(
+                    lr=0.01, lr_decay_epochs=100, num_epochs=200
+                ),
+                "aggregation_method": constants.STATISTICAL_MOMENTS,
+                "name": "nn2_statistical_moments",
+            },
+            {
+                "model": NeuralNetworkClassifierModel(
+                    lr=0.1,
+                    lr_decay_epochs=200,
+                    num_epochs=200,
+                    num_hidden_layers=2,
+                    hidden_layer_dim_factor=[1, 1],
+                ),
+                "aggregation_method": constants.STATISTICAL_MOMENTS,
+                "name": "nn3_statistical_moments",
+            },
+            {
+                "model": NeuralNetworkClassifierModel(
+                    lr=0.1, lr_decay_epochs=100, num_epochs=200
+                ),
+                "aggregation_method": constants.STATISTICAL_MOMENTS,
+                "name": "nn4_statistical_moments",
+            },
+            {
+                "model": NeuralNetworkClassifierModel(
+                    lr=0.1, lr_decay_end_factor=1.0, lr_decay_epochs=100, num_epochs=100
+                ),
+                "aggregation_method": constants.STATISTICAL_MOMENTS,
+                "name": "nn5_statistical_moments",
+            },
             {
                 "model": RandomForestClassifierModel(),
                 "aggregation_method": constants.STATISTICAL_MOMENTS,
@@ -67,43 +67,43 @@ class MultimethodEnsemble:
                 "aggregation_method": constants.STATISTICAL_MOMENTS,
                 "name": "svm_statistical_moments",
             },
-            # {
-            #     "model": NeuralNetworkClassifierModel(lr_decay_epochs=100),
-            #     "aggregation_method": constants.WINDOW_DIVISION,
-            #     "name": "nn1_window_division",
-            # },
-            # {
-            #     "model": NeuralNetworkClassifierModel(
-            #         lr=0.01, lr_decay_epochs=100, num_epochs=200
-            #     ),
-            #     "aggregation_method": constants.WINDOW_DIVISION,
-            #     "name": "nn2_window_division",
-            # },
-            # {
-            #     "model": NeuralNetworkClassifierModel(
-            #         lr=0.1,
-            #         lr_decay_epochs=200,
-            #         num_epochs=200,
-            #         num_hidden_layers=2,
-            #         hidden_layer_dim_factor=[1, 1],
-            #     ),
-            #     "aggregation_method": constants.WINDOW_DIVISION,
-            #     "name": "nn3_window_division",
-            # },
-            # {
-            #     "model": NeuralNetworkClassifierModel(
-            #         lr=0.1, lr_decay_epochs=100, num_epochs=200
-            #     ),
-            #     "aggregation_method": constants.WINDOW_DIVISION,
-            #     "name": "nn4_window_division",
-            # },
-            # {
-            #     "model": NeuralNetworkClassifierModel(
-            #         lr=0.1, lr_decay_end_factor=1.0, lr_decay_epochs=100, num_epochs=100
-            #     ),
-            #     "aggregation_method": constants.WINDOW_DIVISION,
-            #     "name": "nn5_window_division",
-            # },
+            {
+                "model": NeuralNetworkClassifierModel(lr_decay_epochs=100),
+                "aggregation_method": constants.WINDOW_DIVISION,
+                "name": "nn1_window_division",
+            },
+            {
+                "model": NeuralNetworkClassifierModel(
+                    lr=0.01, lr_decay_epochs=100, num_epochs=200
+                ),
+                "aggregation_method": constants.WINDOW_DIVISION,
+                "name": "nn2_window_division",
+            },
+            {
+                "model": NeuralNetworkClassifierModel(
+                    lr=0.1,
+                    lr_decay_epochs=200,
+                    num_epochs=200,
+                    num_hidden_layers=2,
+                    hidden_layer_dim_factor=[1, 1],
+                ),
+                "aggregation_method": constants.WINDOW_DIVISION,
+                "name": "nn3_window_division",
+            },
+            {
+                "model": NeuralNetworkClassifierModel(
+                    lr=0.1, lr_decay_epochs=100, num_epochs=200
+                ),
+                "aggregation_method": constants.WINDOW_DIVISION,
+                "name": "nn4_window_division",
+            },
+            {
+                "model": NeuralNetworkClassifierModel(
+                    lr=0.1, lr_decay_end_factor=1.0, lr_decay_epochs=100, num_epochs=100
+                ),
+                "aggregation_method": constants.WINDOW_DIVISION,
+                "name": "nn5_window_division",
+            },
             {
                 "model": RandomForestClassifierModel(),
                 "aggregation_method": constants.WINDOW_DIVISION,
